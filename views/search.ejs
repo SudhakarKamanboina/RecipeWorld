@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!-- jQuery -->
+<script src="/assets/js/jquery.js"></script>
+
+<script type="text/javascript">
+    var temp =' <%= query %>';
+    //console.log(temp);
+
+    $.ajax({
+        method: "GET",
+        url: "http://api.yummly.com/v1/api/recipes?_app_id=82eccb5e&_app_key=0c0f7b0c0d1cde681c221f41216ea5b5&q="+temp,
+        cache: false,
+        success: function(res) {
+
+            console.log(res);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+
+</script>
+<body>
+
+</body>
+</html>
