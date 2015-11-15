@@ -78,7 +78,7 @@
                 <p>Do you know your FOOD??</p>
                     <div class="box">
                       <div class="container-4">
-                        <input type="search" id="search" placeholder="Search..." />
+                        <input type="search" name="searchbox" id="search" placeholder="Search..." onkeypress="setcolour()"/>
                         <button class="icon" onclick="submit()"><i class="fa fa-search"></i></button>
                       </div>
                     </div>
@@ -249,13 +249,14 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/creative.js"></script>
 
-    <script>
+    <script type="text/javascript">
         function submit(){
-            var query='butter chicken'; //
-            console.log(document.getElementById("search").value());
-
-
+            var query=document.getElementById("search").value;
             window.location.href = 'search/'+query;
+
+        }
+        function setcolour() {
+            document.getElementById("search").style.color = "black";
         }
     </script>
 </body>
