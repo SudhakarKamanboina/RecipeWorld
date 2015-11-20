@@ -52,6 +52,7 @@
                     url = recipes[i].imageUrlsBySize[90];
                     url = url.substr(0, url.length - 5);
                     $('#img' + i).attr("src", url + "s430-c");
+                    $('#imgref' + i).attr("href", "/recipe/"+recipes[i].id);
                     $('#recipe' + i).html(recipes[i].recipeName);
                     $('#desc' + i).html("Cuisine: "+recipes[i].attributes.cuisine[0]);
             }
@@ -106,7 +107,7 @@
     <div class="container-fluid">
         <div class="row no-gutter">
             <div class="col-lg-4 col-sm-6">
-                <a href="http://www.yummly.com/recipe/external/Roasted-Brussels-Sprouts_-Cinnamon-Butternut-Squash_-Pecans_-and-Cranberries-1368040" class="portfolio-box" target="_blank">
+                <a class="portfolio-box" id="imgref1">
                     <img class="img-responsive" id="img1" alt="" border="5">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
