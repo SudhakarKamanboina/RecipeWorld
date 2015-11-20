@@ -53,7 +53,7 @@
                     url = url.substr(0, url.length - 5);
                     $('#img' + i).attr("src", url + "s430-c");
                     $('#recipe' + i).html(recipes[i].recipeName);
-                    $('#desc' + i).html(recipes[i].recipeName);
+                    $('#desc' + i).html("Cuisine: "+recipes[i].attributes.cuisine[0]);
             }
 
         },
