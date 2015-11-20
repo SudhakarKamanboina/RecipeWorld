@@ -47,20 +47,14 @@
         success: function(res) {
             console.log(res);
             var recipes = res.matches;
-            var url = recipes[0].imageUrlsBySize[90];
-            url = url.substr(0, url.length-5);
-            console.log(url);
-            $('#img1').attr("src", url+"s360-c");
-            $('#recipe1').html(recipes[0].recipeName);
-            $('#desc1').html(recipes[0].recipeName);
-            var i=0;
-            recipes.forEach(function(recipe){
-                //console.log(recipe);
-                if(i<6)
-                {
-
-                }
-            });
+            var url;
+            for(i=0; i<recipes.length; i++) {
+                    url = recipes[i].imageUrlsBySize[90];
+                    url = url.substr(0, url.length - 5);
+                    $('#img' + i).attr("src", url + "s430-c");
+                    $('#recipe' + i).html(recipes[i].recipeName);
+                    $('#desc' + i).html(recipes[i].recipeName);
+            }
 
         },
         error: function(err) {
@@ -128,14 +122,14 @@
             </div>
             <div class="col-lg-4 col-sm-6 y-grid-card animate has-image compact">
                 <a href="http://www.yummly.com/recipe/external/Autumn-Bellini-1356649" class="portfolio-box" target="_blank">
-                    <img src="/img/portfolio/recipe2.jpg" class="img-responsive" alt="">
+                    <img class="img-responsive" alt="" id="img2">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded" id="Autumn-Bellini-1356649">
-                                Autumn-Bellini
+                            <div class="project-category text-faded" id="recipe2">
+
                             </div>
-                            <div class="project-name">
-                                sliced pears, apple pie spice, apple cider and pumpkin puree
+                            <div class="project-name" id="desc2">
+
                             </div>
                         </div>
                     </div>
@@ -143,14 +137,14 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <a href="http://www.ourtableforseven.com/2012/10/crock-pot-potato-soup.html" class="portfolio-box" target="_blank">
-                    <img src="/img/portfolio/recipe3.jpg" class="img-responsive" alt="">
+                    <img class="img-responsive" alt="" id="img3">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded" id="_Crock-Pot_-Potato-Soup-1183049">
-                                Crock-Pot-Potato-Soup
+                            <div class="project-category text-faded" id="recipe3">
+
                             </div>
-                            <div class="project-name">
-                                potatoes, cream cheese, garlic powder, onions and chicken stock
+                            <div class="project-name" id="desc3">
+
                             </div>
                         </div>
                     </div>
@@ -158,14 +152,14 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <a href="http://www.jocooks.com/bakery/cakes/magic-cake/" class="portfolio-box" target="_blank">
-                    <img src="/img/portfolio/recipe4.jpg" class="img-responsive" alt="">
+                    <img class="img-responsive" alt="" id="img4">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded" id="Magic-cake-365558">
-                                Magic-Cake
+                            <div class="project-category text-faded" id="recipe4">
+
                             </div>
-                            <div class="project-name">
-                                all-purpose flour, eggs, powdered sugar, milk, vanilla extract, sugar and butter
+                            <div class="project-name" id="desc4">
+
                             </div>
                         </div>
                     </div>
@@ -173,14 +167,14 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <a href="#" class="portfolio-box">
-                    <img src="/img/portfolio/5.jpg" class="img-responsive" alt="">
+                    <img class="img-responsive" alt="" id="img5">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
+                            <div class="project-category text-faded" id="recipe5">
+
                             </div>
-                            <div class="project-name">
-                                Project Name
+                            <div class="project-name" id="desc5">
+
                             </div>
                         </div>
                     </div>
@@ -188,14 +182,14 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <a href="#" class="portfolio-box">
-                    <img src="/img/portfolio/6.jpg" class="img-responsive" alt="">
+                    <img class="img-responsive" alt="" id="img6">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
+                            <div class="project-category text-faded" id="recipe6">
+
                             </div>
-                            <div class="project-name">
-                                Project Name
+                            <div class="project-name" id="desc6">
+
                             </div>
                         </div>
                     </div>
@@ -206,14 +200,6 @@
 </section>
 
 
-
-    <!-- jQuery -->
-    <script src="/assets/js/jquery.js"></script>
-
-
-
-    <!--Navigation-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/smoothscroll.js"></script>
 
 </body>
