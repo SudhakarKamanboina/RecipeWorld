@@ -54,12 +54,25 @@
             console.log(res);
             var img = res.images[0];
             $('#img1').attr("src", "https://lh3.googleusercontent.com/ngy7_56kNN906mYR3K_H_kVBnBXFkYoU_cqwzTYBvv3NoZgkDK5CMqp7hMO2sjzuW-L3g07bA_tyZputgq7ArNg=s760-e300");//img.hostedLargeUrl);
+            createIngredientsTable(res.ingredientLines);
         },
         error: function (err) {
             console.log(err);
         }
     });
 
+    function createIngredientsTable(ingre){
+        var table = document.getElementById("ingredient-table");
+        var tablebody = '<tbody>\n';
+        for(var i=0;i<ingre.length;i++)
+        {
+            tablebody +='<tr><td>\n';
+            tablebody+='<span class="amount">'+ingre[i].substr(0,1)+'</span>\n';
+            tablebody+='<span class="name">'+ingre[i].substr(2)+'</span>\n';
+            tablebody+='</td></tr>\n';
+        }
+        table.innerHTML = tablebody+'</tbody>';
+    }
 
 </script>
 <style>
@@ -254,86 +267,12 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-hover table-striped">
-            <tbody>
-            <tr><td>
-                    <span class="amount">5 </span>
-                    <span class="name">onions</span>
-                </td></tr>
-            <tr><td><span class="amount">5 </span>
-                    <span class="name">onions</span></td></tr>
-            <tr><td><span class="amount">5 </span>
-                    <span class="name">onions</span>
-                </td></tr>
+        <table class="table table-hover table-striped" id="ingredient-table">
 
-            </tbody>
 
         </table>
     </div>
-    <ul>
-        <li class="ingredient">
-            <span class="amount">5 </span>
-            <span class="name">onions</span>
-        </li>
-        <li class="ingredient">
-            <span class="amount">5 </span>
-            <span class="name">onions</span>
-        </li>
-    </ul>
-</div>
-<section id="portfolio">
-    <div class="container-fluid">
-        <div class="row no-gutter">
-            <div class="col-sm-12" style="max-height: 40%;">
-                <a class="" id="imgref1">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded" id="recipe1">
 
-                            </div>
-                            <div class="project-name" id="desc1">
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img class="img-responsive" alt="" id="img5">
-
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded" id="recipe5">
-
-                            </div>
-                            <div class="project-name" id="desc5">
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img class="img-responsive" alt="" id="img6">
-
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded" id="recipe6">
-
-                            </div>
-                            <div class="project-name" id="desc6">
-
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 <script type="text/javascript" src="/js/smoothscroll.js"></script>
