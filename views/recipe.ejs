@@ -11,18 +11,24 @@
     <title>Search Page</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+
 
     <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+
+    <script src="/assets/js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
 
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="/css/animate.min.css" type="text/css">
-    <script src="/assets/js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/assets/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/creative.css" type="text/css">
@@ -37,25 +43,300 @@
 <!-- jQuery -->
 
 <script type="text/javascript">
-    var temp ='<%= query %>';
+    var temp = '<%= query %>';
     //console.log(temp);
 
     $.ajax({
         method: "GET",
-        url: "http://api.yummly.com/v1/api/recipe/"+temp+"?_app_id=82eccb5e&_app_key=0c0f7b0c0d1cde681c221f41216ea5b5&q=butter chicken",
+        url: "http://api.yummly.com/v1/api/recipe/" + temp + "?_app_id=82eccb5e&_app_key=0c0f7b0c0d1cde681c221f41216ea5b5&q=butter chicken",
         cache: false,
-        success: function(res) {
+        success: function (res) {
             console.log(res);
-
-
+            var img = res.images[0];
+            $('#img1').attr("src", "https://lh3.googleusercontent.com/ngy7_56kNN906mYR3K_H_kVBnBXFkYoU_cqwzTYBvv3NoZgkDK5CMqp7hMO2sjzuW-L3g07bA_tyZputgq7ArNg=s760-e300");//img.hostedLargeUrl);
         },
-        error: function(err) {
+        error: function (err) {
             console.log(err);
         }
     });
 
 
 </script>
-<body>
+<style>
+    .secondary {
+        background-color: #f5f5f5;
+        background-repeat: repeat;
+    }
+
+    .recipe-data {
+        font-size: 14px;
+        line-height: 20px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0;
+        width: 60%;
+    }
+
+    .recipe-data li {
+        cursor: pointer;
+        display: block;
+        float: left;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        width: 25%;
+    }
+
+    .recipe-data li .hd, .recipe-data li .bd, .recipe-data li .ft {
+        display: block;
+        font-size: 1em;
+        line-height: 1;
+        width: 150%;
+        margin-left: -25%
+    }
+
+    .recipe-data li .hd {
+        font-family: "Hoefler Text", "Baskerville old face", Garamond, "Times New Roman", serif;
+        color: #6c6c6c;
+        font-style: italic;
+        margin-top: 20px;
+    }
+
+    .recipe-data li .bd {
+        font-family: "Helvetica Neue", "Roboto Thin", "Roboto Light", Roboto, "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 100;
+        color: #e16120;
+        font-size: 4.25em;
+    }
+
+    .recipe-data li .ft {
+        font-family: Raleway, Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: .9em;
+        color: #aaa;
+        line-height: 2;
+    }
+
+    .modifiers {
+        background-color: #f5f5f5;
+        height: 132px;
+        position: relative;
+        width: 96%;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+    }
+
+    .social {
+        height: 40px;
+        position: relative;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+    }
+
+    .social-links {
+        line-height: 20px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .social-links li {
+        cursor: pointer;
+        display: block;
+        float: left;
+        list-style: none;
+        margin: 0 1em;
+        padding: 0;
+        text-align: center;
+    }
+
+    .recipe-ingredients {
+        padding: 1em;
+    }
+
+    .table-striped > tbody > tr:nth-child(odd) > td,
+    .table-striped > tbody > tr:nth-child(odd) > th {
+        background-color: #eee;
+    }
+</style>
+<body style="margin: 0">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand topnav"><i class="fa fa-cutlery fa-fw fa-2x"></i>&nbsp;</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#home" class="smoothScroll"><i class="fa fa-home fa-fw"></i>&nbsp;Home</a>
+                </li>
+                <li>
+                    <a href="#about" class="smoothScroll"><i class="fa fa-info fa-fw">&nbsp;</i>About</a>
+                </li>
+                <li>
+                    <a href="#contact" class="smoothScroll"><i class="fa fa-code-fork fa-fw">&nbsp;</i>Connect</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="" id="recipe_image">
+    <img id="img1" alt="" width="100%" height="500px">
+</div>
+<div class="secondary">
+    <div class="modifiers">
+        <ul class="recipe-data">
+            <li class="ingredient-data">
+                <span class="hd">Ingredients</span>
+                <span class="bd">20</span>
+                <span class="ft">Count</span>
+            </li>
+            <li class="nutrition-data">
+                <span class="hd">Nutrition</span>
+                <span class="bd">420</span>
+                <span class="ft">Calories</span>
+            </li>
+            <li class="time-data">
+                <span class="hd">Total Time</span>
+                <span class="bd">55</span>
+                <span class="ft">Minutes</span>
+            </li>
+            <li class="rating-data">
+                <span class="hd">Rating</span>
+                <span class="bd bd-rating no-data">. . .</span>
+                <span class="ft">Review it now!</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="social">
+    <ul class="social-links">
+        <li>
+            <a href="#"><img src="" height="20px" width="20px"/></a>
+        </li>
+        <li>
+            <a href="#"><img src="" height="20px" width="20px"/></a>
+        </li>
+        <li>
+            <a href="#"><img src="" height="20px" width="20px"/></a>
+        </li>
+        <li>
+            <a href="#"><img src="" height="20px" width="20px"/></a>
+        </li>
+    </ul>
+
+</div>
+<div class="recipe-ingredients col-lg-8 col-sm-12 col-md-10">
+    <div class="row">
+        <div class="col-sm-6">
+            <label style="font-size: 1.5em">Ingredients</label>
+        </div>
+        <div class="col-sm-6 text-right">
+            <label for="servings">Servings</label>
+            <input id="servings" type="number"/>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <tbody>
+            <tr><td>
+                    <span class="amount">5 </span>
+                    <span class="name">onions</span>
+                </td></tr>
+            <tr><td><span class="amount">5 </span>
+                    <span class="name">onions</span></td></tr>
+            <tr><td><span class="amount">5 </span>
+                    <span class="name">onions</span>
+                </td></tr>
+
+            </tbody>
+
+        </table>
+    </div>
+    <ul>
+        <li class="ingredient">
+            <span class="amount">5 </span>
+            <span class="name">onions</span>
+        </li>
+        <li class="ingredient">
+            <span class="amount">5 </span>
+            <span class="name">onions</span>
+        </li>
+    </ul>
+</div>
+<section id="portfolio">
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-sm-12" style="max-height: 40%;">
+                <a class="" id="imgref1">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded" id="recipe1">
+
+                            </div>
+                            <div class="project-name" id="desc1">
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="portfolio-box">
+                    <img class="img-responsive" alt="" id="img5">
+
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded" id="recipe5">
+
+                            </div>
+                            <div class="project-name" id="desc5">
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="portfolio-box">
+                    <img class="img-responsive" alt="" id="img6">
+
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded" id="recipe6">
+
+                            </div>
+                            <div class="project-name" id="desc6">
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript" src="/js/smoothscroll.js"></script>
+
 </body>
 </html>
