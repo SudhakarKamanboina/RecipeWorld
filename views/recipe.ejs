@@ -55,6 +55,8 @@
             var img = res.images[0];
             $('#img1').attr("src", "https://lh3.googleusercontent.com/ngy7_56kNN906mYR3K_H_kVBnBXFkYoU_cqwzTYBvv3NoZgkDK5CMqp7hMO2sjzuW-L3g07bA_tyZputgq7ArNg=s760-e300");//img.hostedLargeUrl);
             createIngredientsTable(res.ingredientLines);
+            document.getElementById("count").textContent = res.ingredientLines.length;
+            document.getElementById("count").textContent = res.ingredientLines.length;
         },
         error: function (err) {
             console.log(err);
@@ -67,8 +69,8 @@
         for(var i=0;i<ingre.length;i++)
         {
             tablebody +='<tr><td>\n';
-            tablebody+='<span class="amount">'+ingre[i].substr(0,1)+'</span>\n';
-            tablebody+='<span class="name">'+ingre[i].substr(2)+'</span>\n';
+            //tablebody+='<span class="amount">'+ingre[i].substr(0,1)+'</span>\n';
+            tablebody+='<span class="name">'+ingre[i]+'</span>\n';
             tablebody+='</td></tr>\n';
         }
         table.innerHTML = tablebody+'</tbody>';
@@ -212,22 +214,22 @@
         <ul class="recipe-data">
             <li class="ingredient-data">
                 <span class="hd">Ingredients</span>
-                <span class="bd">20</span>
+                <span class="bd" id="count"></span>
                 <span class="ft">Count</span>
             </li>
             <li class="nutrition-data">
                 <span class="hd">Nutrition</span>
-                <span class="bd">420</span>
+                <span class="bd" id="nutrition">420</span>
                 <span class="ft">Calories</span>
             </li>
             <li class="time-data">
                 <span class="hd">Total Time</span>
-                <span class="bd">55</span>
+                <span class="bd" id="totaltime">55</span>
                 <span class="ft">Minutes</span>
             </li>
             <li class="rating-data">
                 <span class="hd">Rating</span>
-                <span class="bd bd-rating no-data">. . .</span>
+                <span class="bd bd-rating no-data" id="ratings">. . .</span>
                 <span class="ft">Review it now!</span>
             </li>
         </ul>
