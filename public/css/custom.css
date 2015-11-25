@@ -1,0 +1,111 @@
+.custombar-default {
+    border-color: rgba(34,34,34,.05);
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    background-color: #f8f8f8;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+.custombar-default .custombar-header .custombar-brand {
+    text-transform: uppercase;
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-weight: 700;
+    color: #f05f40;
+}
+
+.custombar-default .custombar-header .custombar-brand:hover,
+.custombar-default .custombar-header .custombar-brand:focus {
+    color: #eb3812;
+}
+
+.custombar-default .custom > li>a,
+.custombar-default .custom>li>a:focus {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+}
+
+.custombar-default .custom > li>a:hover,
+.custombar-default .custom>li>a:focus:hover {
+    color: #f05f40;
+}
+
+.custombar-default .custom > li.active>a,
+.custombar-default .custom>li.active>a:focus {
+    color: #f05f40!important;
+    background-color: #f8f8f8;
+}
+
+.custombar-default .custom > li.active>a:hover,
+.custombar-default .custom>li.active>a:focus:hover {
+    background-color: transparent;
+}
+
+@media(min-width:768px) {
+    .custombar-default {
+        border-color: rgba(255,255,255,.3);
+        background-color: #f8f8f8;
+    }
+
+    .custombar-default .custombar-header .custombar-brand {
+        color: rgba(0,0,0,.7);
+    }
+
+    .custombar-default .custombar-header .custombar-brand:hover,
+    .custombar-default .custombar-header .custombar-brand:focus {
+        color: #fff;
+    }
+
+    .custombar-default .custom > li>a,
+    .custombar-default .custom>li>a:focus {
+        color: rgba(255,255,255,.7);
+    }
+
+    .custombar-default .custom > li>a:hover,
+    .custombar-default .custom>li>a:focus:hover {
+        color: #fff;
+    }
+
+    .custombar-default.affix {
+        border-color: rgba(34,34,34,.05);
+        background-color: #fff;
+    }
+
+    .custombar-default.affix .custombar-header .custombar-brand {
+        font-size: 14px;
+        color: #f05f40;
+    }
+
+    .custombar-default.affix .custombar-header .custombar-brand:hover,
+    .custombar-default.affix .custombar-header .custombar-brand:focus {
+        color: #eb3812;
+    }
+
+    .custombar-default.affix .custom > li>a,
+    .custombar-default.affix .custom>li>a:focus {
+        color: #222;
+    }
+
+    .custombar-default.affix .custom > li>a:hover,
+    .custombar-default.affix .custom>li>a:focus:hover {
+        color: #f05f40;
+    }
+}
+
+a {
+    color: #222;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+a:hover,
+a:focus {
+    color: #222;
+}
+
+.topnav {
+    font-size: 14px;
+}
