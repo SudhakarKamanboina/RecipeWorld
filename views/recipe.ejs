@@ -56,8 +56,9 @@
             $('#img1').attr("src", "https://lh3.googleusercontent.com/ngy7_56kNN906mYR3K_H_kVBnBXFkYoU_cqwzTYBvv3NoZgkDK5CMqp7hMO2sjzuW-L3g07bA_tyZputgq7ArNg=s760-e300");//img.hostedLargeUrl);
             createIngredientsTable(res.ingredientLines);
             document.getElementById("count").textContent = res.ingredientLines.length;
-            document.getElementById("count").textContent = res.ingredientLines.length;
-        },
+            document.getElementById("totaltime").textContent = res.totalTime.substr(0,2);
+            document.getElementById("ratings").textContent = res.rating+'/5';
+    },
         error: function (err) {
             console.log(err);
         }
