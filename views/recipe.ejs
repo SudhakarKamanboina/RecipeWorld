@@ -53,16 +53,40 @@
         success: function (res) {
             console.log(res);
             var img = res.images[0];
-            $('#img1').attr("src", "https://lh3.googleusercontent.com/ngy7_56kNN906mYR3K_H_kVBnBXFkYoU_cqwzTYBvv3NoZgkDK5CMqp7hMO2sjzuW-L3g07bA_tyZputgq7ArNg=s760-e300");//img.hostedLargeUrl);
+            var dbtime=res.totalTime;
+            url = res.images[0].imageUrlsBySize[360];
+            url = url.substr(0, url.length - 6);
+            $('#img1').attr("src", url + "s760-e300");
+            //$('#img1').attr("src", "https://lh3.googleusercontent.com/ngy7_56kNN906mYR3K_H_kVBnBXFkYoU_cqwzTYBvv3NoZgkDK5CMqp7hMO2sjzuW-L3g07bA_tyZputgq7ArNg=s760-e300");//img.hostedLargeUrl);
             createIngredientsTable(res.ingredientLines);
             document.getElementById("count").textContent = res.ingredientLines.length;
-            document.getElementById("totaltime").textContent = res.totalTime.substr(0,2);
+            document.getElementById("totaltime").textContent = convertToMinutes(dbtime);
             document.getElementById("ratings").textContent = res.rating+'/5';
     },
         error: function (err) {
             console.log(err);
         }
     });
+
+    function convertToMinutes(totalTime){
+        var hours, minutes;
+        var result;
+        if (totalTime.indexOf("hr") >= 0) {
+            hours = totalTime.substr(0,1);
+            minutes = totalTime.substr(5,6);
+            result = parseInt(hours*60)+parseInt(minutes);
+        }
+        else
+        {
+            result = totalTime.substr(0,2);
+        }
+        if(totalTime.indexOf("hrs") >= 0){
+            hours = totalTime.substr(0,2);
+            minutes = totalTime.substr(6,7);
+            result = parseInt(hours*60)+parseInt(minutes);
+        }
+        return result;
+    }
 
     function createIngredientsTable(ingre){
         var table = document.getElementById("ingredient-table");
@@ -226,7 +250,7 @@
             <li class="time-data">
                 <span class="hd">Total Time</span>
                 <span class="bd" id="totaltime">55</span>
-                <span class="ft">Minutes</span>
+                <span class="ft" id="time">Minutes</span>
             </li>
             <li class="rating-data">
                 <span class="hd">Rating</span>
