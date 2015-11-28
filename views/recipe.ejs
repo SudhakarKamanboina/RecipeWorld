@@ -64,7 +64,7 @@
             document.getElementById("totaltime").textContent = convertToMinutes(dbtime);
             document.getElementById("ratings").textContent = res.rating+'/5';
             document.getElementById("servings").textContent = res.numberOfServings;
-            document.getElementById("recipeText").innerHTML = "<b>"+res.name+"</b><br/>"+"Cuisine: "+res.attributes.cuisine[0]+"<br/>Course: "+res.attributes.course[0];
+            document.getElementById("recipeText").innerHTML = "<b>"+res.name+"</b><br/>"+"<h4>Cuisine: "+res.attributes.cuisine[0]+"<br/>Course: "+res.attributes.course[0]+"</h4>";
             $('#source').attr("href", res.source.sourceRecipeUrl);
         },
         error: function (err) {
