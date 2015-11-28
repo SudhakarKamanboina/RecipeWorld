@@ -56,24 +56,29 @@
             var dbtime=res.totalTime;
             url = res.images[0].imageUrlsBySize[360];
             url = url.substr(0, url.length - 6);
+            console.log(url);
             $('#img1').attr("src", url + "s760-e300");
             //$('#img1').attr("src", "https://lh3.googleusercontent.com/ngy7_56kNN906mYR3K_H_kVBnBXFkYoU_cqwzTYBvv3NoZgkDK5CMqp7hMO2sjzuW-L3g07bA_tyZputgq7ArNg=s760-e300");//img.hostedLargeUrl);
             createIngredientsTable(res.ingredientLines);
             document.getElementById("count").textContent = res.ingredientLines.length;
             document.getElementById("totaltime").textContent = convertToMinutes(dbtime);
             document.getElementById("ratings").textContent = res.rating+'/5';
-    },
+            document.getElementById("servings").textContent = res.numberOfServings;
+            document.getElementById("recipeText").innerHTML = "<b>"+res.name+"</b><br/>"+"Cuisine: "+res.attributes.cuisine[0]+"<br/>Course: "+res.attributes.course[0];
+            $('#source').attr("href", res.source.sourceRecipeUrl);
+        },
         error: function (err) {
             console.log(err);
         }
     });
 
     function convertToMinutes(totalTime){
-        var hours, minutes;
+        var hours, minutes=0;
         var result;
         if (totalTime.indexOf("hr") >= 0) {
             hours = totalTime.substr(0,1);
-            minutes = totalTime.substr(5,6);
+            if (totalTime.indexOf("mins") >= 0)
+                minutes = totalTime.substr(5,6);
             result = parseInt(hours*60)+parseInt(minutes);
         }
         else
@@ -82,7 +87,8 @@
         }
         if(totalTime.indexOf("hrs") >= 0){
             hours = totalTime.substr(0,2);
-            minutes = totalTime.substr(6,7);
+            if (totalTime.indexOf("mins") >= 0)
+                minutes = totalTime.substr(6,7);
             result = parseInt(hours*60)+parseInt(minutes);
         }
         return result;
@@ -201,6 +207,16 @@
     .table-striped > tbody > tr:nth-child(odd) > th {
         background-color: #eee;
     }
+
+    .browse .textContainer {
+        height: 430px;
+        line-height: 400px;
+    }
+
+    .textContainer h2 {
+        vertical-align: middle;
+        display: inline-block;
+    }
 </style>
 <body style="margin: 0">
 <!-- Navigation -->
@@ -230,10 +246,16 @@
     </div>
     <!-- /.container -->
 </nav>
-
-<div class="" id="recipe_image">
-    <img id="img1" alt="" width="100%" height="500px">
-</div>
+<section id="browse" class="browse" style="padding: 0">
+    <div class="row">
+        <div class="col-md-4 textContainer">
+            <h2 class="recipe-ingredients text-left" id="recipeText"></h2>
+        </div>
+        <div class="col-md-8" id="recipe_image">
+            <img id="img1" alt="" width="100%" height="500px">
+        </div>
+    </div>
+</section>
 <div class="secondary">
     <div class="modifiers">
         <ul class="recipe-data">
@@ -243,9 +265,9 @@
                 <span class="ft">Count</span>
             </li>
             <li class="nutrition-data">
-                <span class="hd">Nutrition</span>
-                <span class="bd" id="nutrition">420</span>
-                <span class="ft">Calories</span>
+                <span class="hd">Servings</span>
+                <span class="bd" id="servings"></span>
+                <span class="ft">People</span>
             </li>
             <li class="time-data">
                 <span class="hd">Total Time</span>
@@ -277,21 +299,23 @@
     </ul>
 
 </div>
-<div class="recipe-ingredients col-lg-8 col-sm-12 col-md-10">
+<div class="recipe-ingredients col-lg-8 col-sm-12 col-md-10 col-centered">
     <div class="row">
         <div class="col-sm-6">
             <label style="font-size: 1.5em">Ingredients</label>
         </div>
-        <div class="col-sm-6 text-right">
-            <label for="servings">Servings</label>
-            <input id="servings" type="number"/>
-        </div>
+
     </div>
     <div class="table-responsive">
         <table class="table table-hover table-striped" id="ingredient-table">
 
 
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 ">
+        <span class="recipe-ingredients"> More-Info:</span><a id="source">Go to Source of this Recipe</a>
     </div>
 </div>
 
