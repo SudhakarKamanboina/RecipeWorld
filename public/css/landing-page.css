@@ -51,9 +51,6 @@ h7 {
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
-    background: url(../img/wallbg.png) no-repeat center center;
-    background-size: cover;
 }
 
 .intro-message {
@@ -132,9 +129,6 @@ h7 {
 
 .banner {
     padding: 100px 0;
-    color: #f8f8f8;
-    background: url(../img/ingr.png) no-repeat center center;
-    background-size: cover;
 }
 
 .banner h7 {
@@ -184,6 +178,30 @@ footer {
 
 p.copyright {
     margin: 15px 0 0;
+}
+
+section.module.parallax {
+  height: 600px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+section.module.parallax-1 {
+  background-image: url(../img/wallbg.png);
+}
+
+section.module.para {
+  height: 250px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+section.module.parallax-2 {
+  background-image: url(../img/ingr.png);
 }
 
 
