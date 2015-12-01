@@ -2,6 +2,13 @@
 <html>
   <head>
     <script src="http://www.webglearth.com/v2/api.js"></script>
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
     <script>
       function initialize() {
 
@@ -10,8 +17,8 @@
 
         //  using custom map I created from Mapbox
         WE.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
-          id: 'prakashkurup7.o9lon60o',
-          accessToken: 'pk.eyJ1IjoicHJha2FzaGt1cnVwNyIsImEiOiJjaWd5aTM3cjUwdmRtNHBtM3ozbnE2eDJzIn0.U5HAGiCUCcILBuvAKxvNOA#3/0.00/0.00'
+          id: 'prakashkurup7.oa30akk1',
+          accessToken: 'pk.eyJ1IjoicHJha2FzaGt1cnVwNyIsImEiOiJjaWd5aTM3cjUwdmRtNHBtM3ozbnE2eDJzIn0.U5HAGiCUCcILBuvAKxvNOA#3/56.32/-133.42'
 
         }).addTo(earth);
 
@@ -137,17 +144,17 @@
         var Paraguay = WE.marker([-23.253143, -58.481309],'img/foodome.png', 48, 48).addTo(earth);
         Paraguay.bindPopup("<a target='_blank' href='http://www.kingarthurflour.com/recipes/sopa-paraguaya-recipe'>Sopa paraguaya</a><br><br/><span style='font-size:10px;color:#999'>Sopa paraguaya is a traditional Paraguayan and Northeastern Argentine food. Literally meaning Paraguayan soup, sopa paraguaya is similar to corn bread. Corn flour, cheese and milk or whey are common ingredients.</span>", {maxWidth: 150, closeButton: true});
 
-        earth.setView([39.672064, -101.000677], 2.5);
+        earth.setView([39.672064, -101.000677], 2.2);
       }
 
     </script>
     <style>
       html, body{padding: 0; margin: 0; background-color: black;}
-      #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
+      #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute;}
     </style>
     <title>Recipe World Map</title>
   </head>
-  <body onload="initialize()">
+  <body onload="initialize()">        
     <div id="earth_div"></div>
   </body>
 </html>

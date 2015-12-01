@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This website displays Dashboard for Recipe World">
+    <meta name="author" content="recipe world team skeuomorph">
+    <meta name="keyword" content="recipe world cooking ingredients cuisine nutrition">
+    <link rel="icon" type="image/x-icon" href="img/174.png" />
+    <title>Recipe World</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <style>
+        .axis text {
+            font: 10px sans-serif;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .bar {
+            fill: steelblue;
+            fill-opacity: .9;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+
+        label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+</br>
+</br>
+<div class="modal-body row" style="height: 600px">
+    <div id="contentLeft" class="col-sm-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 style="color: #1a1a1a">Charts</h4>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="charts.html">1. Nutrition Stats</a></li>
+                <li class="list-group-item"><a href="sortableChart.html">2. Country-wise Nutritional Stats</a></li>
+                <li class="list-group-item"><a href="bulletChart.html">3. Online Food Ordering Stats.</a></li>
+                <li class="list-group-item"><a href="radarChart.html">4. Health Stats.</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10" style="height:460px">
+        <h2 style="color: #1a1a1a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Country-wise Nutritional Value</h2>
+        <label><input type="checkbox"> Sort values</label>
+        <script src="//d3js.org/d3.v3.min.js"></script>
+        <script>
+
+            var margin = {top: 20, right: 20, bottom: 30, left: 40},
+                    width = 960 - margin.left - margin.right,
+                    height = 500 - margin.top - margin.bottom;
+
+            var formatPercent = d3.format(".0%");
+
+            var x = d3.scale.ordinal()
+                    .rangeRoundBands([0, width], .1, 1);
+
+            var y = d3.scale.linear()
+                    .range([height, 0]);
+
+            var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom");
+
+            var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .tickFormat(formatPercent);
+
+            var svg = d3.select(".col-md-10").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            d3.tsv("data.tsv", function(error, data) {
+
+                data.forEach(function(d) {
+                    d.frequency = +d.frequency;
+                });
+
+                x.domain(data.map(function(d) { return d.letter; }));
+                y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+                svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+                svg.append("g")
+                        .attr("class", "y axis")
+                        .call(yAxis)
+                        .append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", 6)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .text("Nutrition");
+
+                svg.selectAll(".bar")
+                        .data(data)
+                        .enter().append("rect")
+                        .attr("class", "bar")
+                        .attr("x", function(d) { return x(d.letter); })
+                        .attr("width", x.rangeBand())
+                        .attr("y", function(d) { return y(d.frequency); })
+                        .attr("height", function(d) { return height - y(d.frequency); });
+
+                d3.select("input").on("change", change);
+
+                var sortTimeout = setTimeout(function() {
+                    d3.select("input").property("checked", true).each(change);
+                }, 2000);
+
+                function change() {
+                    clearTimeout(sortTimeout);
+
+                    // Copy-on-write since tweens are evaluated after a delay.
+                    var x0 = x.domain(data.sort(this.checked
+                                    ? function(a, b) { return b.frequency - a.frequency; }
+                                    : function(a, b) { return d3.ascending(a.letter, b.letter); })
+                            .map(function(d) { return d.letter; }))
+                            .copy();
+
+                    svg.selectAll(".bar")
+                            .sort(function(a, b) { return x0(a.letter) - x0(b.letter); });
+
+                    var transition = svg.transition().duration(750),
+                            delay = function(d, i) { return i * 50; };
+
+                    transition.selectAll(".bar")
+                            .delay(delay)
+                            .attr("x", function(d) { return x0(d.letter); });
+
+                    transition.select(".x.axis")
+                            .call(xAxis)
+                            .selectAll("g")
+                            .delay(delay);
+                }
+            });
+
+        </script>
+    </div>
+</div>
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand topnav"><i class="fa fa-cutlery fa-fw fa-2x"></i>&nbsp;</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="index.html#home" class="smoothScroll"><i class="fa fa-home fa-fw"></i>&nbsp;Home</a>
+                </li>
+                <li>
+                    <a href="index.html#about" class="smoothScroll"><i class="fa fa-info fa-fw">&nbsp;</i>About</a>
+                </li>
+                <li>
+                    <a href="index.html#contact" class="smoothScroll"><i class="fa fa-code-fork fa-fw">&nbsp;</i>Connect</a>
+                </li>
+                <li>
+                    <div style="margin-top: 15px;"id="google_translate_element" class="smoothScroll"></div><script type="text/javascript">
+                    function googleTranslateElementInit() {
+                        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,es,fr,hi,mr,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                    }
+                </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="list-inline">
+                    <li>
+                        <a href="index.html#home" class="smoothScroll">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="index.html#about" class="smoothScroll">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="index.html#contact" class="smoothScroll">Connect</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small">Copyright &copy; Recipe World 2015. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="assets/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!--Navigation-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/smoothscroll.js"></script>
+
+</body>
+
+</html>
