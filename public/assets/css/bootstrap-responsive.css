@@ -50,15 +50,15 @@
 }
 
 .visible-phone {
-  display: none !important;
+  display: block !important;
 }
 
 .visible-tablet {
-  display: none !important;
+  display: block !important;
 }
 
 .hidden-desktop {
-  display: none !important;
+  display: block !important;
 }
 
 .visible-desktop {
