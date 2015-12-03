@@ -67,7 +67,8 @@
         </div>
     </div>
     <div class="col-md-10" style="height:460px">
-        <h2 style="color: #1a1a1a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online food ordering stats (US)</h2>
+        <h2 style="color: #1a1a1a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online food ordering stats in 2015(US)</h2>
+        <button style="visibility: hidden">Update</button>
         <script src="//d3js.org/d3.v3.min.js"></script>
         <script src="js/bullet.js"></script>
         <script>
@@ -106,9 +107,9 @@
                         .attr("dy", "1em")
                         .text(function(d) { return d.subtitle; });
 
-                setInterval(function() {
+                d3.selectAll("button").on("click", function() {
                     svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
-                }, 3000);
+                });
             });
 
             function randomize(d) {

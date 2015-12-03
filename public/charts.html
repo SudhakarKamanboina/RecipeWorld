@@ -53,7 +53,7 @@
 </br>
 </br>
 
-<div class="modal-body row" style="height: 520px">
+<div class="modal-body row" style="height: 630px">
 <div id="contentLeft" class="col-sm-2">
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -68,7 +68,8 @@
 </div>
 </div>
 <div class="col-md-10" style="height:460px">
-    <h2 style="color: #1a1a1a">Nutrition in recipe in different parts of the world</h2>
+    <h2 style="color: #1a1a1a">Nutrition in regular food</h2>
+    <span><button>Next</button><h2 id="food" style="color: #1a1a1a">Omelette</h2></span>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
 
@@ -116,11 +117,21 @@
             });
         }
 
+        var nextWord = (function() {
+            var wordArray = ['Pan Cake','Oatmeal','Upma','Doughnut'];
+            var count = -1;
+            return function() {
+                return wordArray[++count % wordArray.length];
+            }
+        }());
+
         change(randomData());
 
-        setInterval(function(){
+
+        d3.selectAll("button").on("click", function() {
             change(randomData());
-        }, 3000);
+            document.getElementById('food').innerHTML = nextWord();// TODO automatic transition
+        });
 
         function change(data) {
 
