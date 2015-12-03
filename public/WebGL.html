@@ -2,10 +2,15 @@
 <html>
   <head>
     <script src="http://www.webglearth.com/v2/api.js"></script>
+    <!--<script src="js/api.js"></script>-->
 
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
 
-        <!-- Custom Fonts -->
+    <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -34,7 +39,7 @@
 
         // adding markers 
         var India = WE.marker([21.169379, 77.378879],'img/foodome.png', 48, 48).addTo(earth);
-        India.bindPopup("<a href='http://cooking.nytimes.com/recipes/1016754-butter-chicken'>Butter Chicken</a><br><br/><span style='font-size:10px;color:#999'>Butter chicken is the General Tso of Indian food, a great, ever-evolving, cross-continental dish found in Delhi, London, New York, Perth and most points in between. </span>", {maxWidth: 150, closeButton: true});
+        India.bindPopup("<a target='_blank' href='http://cooking.nytimes.com/recipes/1016754-butter-chicken'>Butter Chicken</a><br><br/><span style='font-size:10px;color:#999'>Butter chicken is the General Tso of Indian food, a great, ever-evolving, cross-continental dish found in Delhi, London, New York, Perth and most points in between. </span>", {maxWidth: 150, closeButton: true});
 
         var USA = WE.marker([39.795615, -101.067435],'img/foodome.png', 48, 48).addTo(earth);
         USA.bindPopup("<a target='_blank' href='http://cooking.nytimes.com/recipes/1016596-hamburgers-tavern-style'>Hamburgers</a><br><br/><span style='font-size:10px;color:#999'>The modern hamburger was a product of the culinary needs of a society rapidly changing due to industrialization and therefore having less time to prepare and consume meals.</span>", {maxWidth: 150, closeButton: true});
@@ -144,17 +149,26 @@
         var Paraguay = WE.marker([-23.253143, -58.481309],'img/foodome.png', 48, 48).addTo(earth);
         Paraguay.bindPopup("<a target='_blank' href='http://www.kingarthurflour.com/recipes/sopa-paraguaya-recipe'>Sopa paraguaya</a><br><br/><span style='font-size:10px;color:#999'>Sopa paraguaya is a traditional Paraguayan and Northeastern Argentine food. Literally meaning Paraguayan soup, sopa paraguaya is similar to corn bread. Corn flour, cheese and milk or whey are common ingredients.</span>", {maxWidth: 150, closeButton: true});
 
-        earth.setView([39.672064, -101.000677], 2.2);
+        earth.setView([39.672064, -101.000677], 2);
       }
 
     </script>
     <style>
       html, body{padding: 0; margin: 0; background-color: black;}
-      #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute;}
+      #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
+      #title {position: absolute; top:10px; left: 10px;}
+      #button {position: absolute; top:10px; right: 10px;}
     </style>
     <title>Recipe World Map</title>
   </head>
   <body onload="initialize()">        
-    <div id="earth_div"></div>
+    <div id="earth_div" ></div>
+    <div id="title">
+        <h3>Recipe Map</h3>
+        <h8>Popular dishes around the world!</h8>
+    </div>
+    <div id="button">
+      <a href="index.html" class="btn btn-primary btn-lg"><i class="fa fa-cutlery fa-fw"></i></a>
+    </div>
   </body>
 </html>
