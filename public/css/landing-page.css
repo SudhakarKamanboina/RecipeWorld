@@ -243,17 +243,21 @@ section.module.parallax-2 {
 /*photobanner*/
 
 #container_1 {
-    width: 1000px;
-    height: 250px;
+    /*width: 1000px;*/
+    /*height: 250px;*/
+    /*width: 100%;*/
+    /*height: auto;*/
     overflow: hidden;
     margin: 0px auto;
     background: white;
+    /*background-size: 100%;*/
 }
 
 .photobanner {
     height: 233px;
     width: 3550px;
     margin-bottom: 50px;
+    position: relative;
 }
 
 .photobanner img {
